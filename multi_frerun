@@ -17,6 +17,10 @@ parser.add_argument('--regression','-r', type=str, help='Regression test name', 
 parser.add_argument('--submit','-s', action='store_true', help='Submit to the queue for running')
 parser.add_argument('--no-transfer', action='store_true', help='Do not transfer output to archive')
 parser.add_argument('--no-combine', action='store_true', help='Do not combine the output')
+group = parser.add_mutually_exclusive_group()
+group.add_argument("-o", "--overwrite", action="store_true", help='Overwrite the state directory and previous output')
+group.add_argument("-u", "--unique", action="store_true", help='Create a unique experiment state/output directory')
+group.add_argument("--extend", action="store_true", help='Extend a previous run')
 ## Parse the arguments
 args = parser.parse_args()
 
@@ -28,6 +32,9 @@ es = args.e
 s='-s'
 nt='--no-transfer'
 nc='--no-combine'
+over='--overwrite'
+uniq='--unique'
+ext='--extend'
 ## Store the platforms and targets in a list
 p=ps.split(',')
 t=ts.split(',')
@@ -50,6 +57,13 @@ for plat in p:
                frun[0].append(nt)
           if args.no_combine:
                frun[0].append(nc)
+          if args.overwrite:
+               frun[0].append(over)
+          if args.unique:
+               frun[0].append(uniq)
+          if args.extend:
+               frun[0].append(ext)
+
 ## Run frerun
           subprocess.call(frun[0])
 
