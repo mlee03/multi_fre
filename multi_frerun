@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='Run multiple freruns with a single
 parser.add_argument('-x', type=str, help='XML file', required=True)
 parser.add_argument('-p', type=str, help='comma separated fre platforms', required=True)
 parser.add_argument('-t', type=str, help='comma separated fre targets', required=True)
-parser.add_argument('-e', type=str, help='compile experiment', required=True)
+parser.add_argument('-e', type=str, help='List of experiments to run', required=True)
 parser.add_argument('--regression','-r', type=str, help='Regression test name', required=False)
 parser.add_argument('--submit','-s', action='store_true', help='Submit to the queue for running')
 parser.add_argument('--no-transfer', action='store_true', help='Do not transfer output to archive')
